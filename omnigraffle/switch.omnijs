@@ -1,0 +1,35 @@
+/*{
+    "author": "alswl",
+    "targets": ["omnigraffle"],
+    "type": "action",
+    "identifier": "com.alswl.switch",
+    "version": "0.1",
+    "description": "A plug-in that switch two graphics",
+    "label": "switch",
+    "mediumLabel": "switch",
+    "longLabel": "switch",
+    "paletteLabel": "switch",
+}*/
+(() => {
+    var action = new PlugIn.Action(function(selection) {
+        // doc https://omni-automation.com/tutorial/og-macos/position-size.html
+        var g1 = selection.graphics[0];
+        var g2 = selection.graphics[1];
+
+        var tmp = g1.geometry;
+        var rect = g1.geometry;
+        rect.origin = new Point(g2.geometry.origin.x, g2.geometry.origin.y);
+        g1.geometry = rect;
+        var rect = g2.geometry;
+        rect.origin = new Point(tmp.origin.x, tmp.origin.y);
+        g2.geometry = rect;
+    });
+
+    // If needed, uncomment, and add a function that returns true if the current selection is appropriate for the action.
+    action.validate = function(selection){
+        return selection.graphics.length == 2
+    };
+        
+    return action;
+})();
+
