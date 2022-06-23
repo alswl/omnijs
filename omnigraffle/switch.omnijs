@@ -33,3 +33,4 @@
     return action;
 })();
 
+// vim: set ft=javascript:
