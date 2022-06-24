@@ -1,0 +1,32 @@
+/*{
+    "author": "alswl",
+    "targets": ["omnigraffle"],
+    "type": "action",
+    "identifier": "com.alswl.set-name-dynamic",
+    "version": "0.1",
+    "description": "A plug-in that make Graphics Name and Text links",
+    "label": "set-name-dynamic",
+    "mediumLabel": "set-name-dynamic",
+    "longLabel": "set-name-dynamic",
+    "paletteLabel": "set-name-dynamic",
+}*/
+(() => {
+    var action = new PlugIn.Action(function(selection) {
+        selection.graphics.forEach(g => {
+            // console.log(g.text || "null");
+            g.name = g.text;
+            g.text = "<%GraphicName%>";
+        });
+    });
+
+    // If needed, uncomment, and add a function that returns true if the current selection is appropriate for the action.
+    /*
+    action.validate = function(selection){
+
+    };
+    */
+        
+    return action;
+})();
+
+// vim: set ft=javascript:
