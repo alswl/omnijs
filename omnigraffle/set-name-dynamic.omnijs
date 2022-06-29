@@ -11,22 +11,27 @@
     "paletteLabel": "set-name-dynamic",
 }*/
 (() => {
-    var action = new PlugIn.Action(function(selection) {
-        selection.graphics.forEach(g => {
-            // console.log(g.text || "null");
-            g.name = g.text;
-            g.text = "<%GraphicName%>";
-        });
-    });
+  const gName = "<%GraphicName%>";
+  var action = new PlugIn.Action(function(selection) {
+    selection.graphics.forEach(g => {
+      // console.log(g.text || "null");
+      if (g.text === gName) {
+        return;
+      }
 
-    // If needed, uncomment, and add a function that returns true if the current selection is appropriate for the action.
-    /*
+      g.name = g.text;
+      g.text = gName;
+    });
+  });
+
+  // If needed, uncomment, and add a function that returns true if the current selection is appropriate for the action.
+  /*
     action.validate = function(selection){
 
     };
     */
-        
-    return action;
+
+  return action;
 })();
 
 // vim: set ft=javascript:
